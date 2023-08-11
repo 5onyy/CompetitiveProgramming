@@ -1,0 +1,29 @@
+# depslib dependency file v1.0
+1601825242 source:d:\hoc\truonglhp\doi tuyen\thay hung\poj problems\1258\1258.cpp
+	<cassert>
+	<climits>
+	<cmath>
+	<complex>
+	<cstdio>
+	<cstdlib>
+	<cstring>
+	<ctime>
+	<algorithm>
+	<bitset>
+	<deque>
+	<fstream>
+	<functional>
+	<iomanip>
+	<iostream>
+	<iterator>
+	<list>
+	<map>
+	<numeric>
+	<queue>
+	<set>
+	<sstream>
+	<stack>
+	<string>
+	<utility>
+	<vector>
+

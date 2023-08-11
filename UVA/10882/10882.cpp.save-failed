@@ -1,0 +1,26 @@
+#include <bits/stdc++.h>
+
+using namespace std;
+
+int n, a, c, m, ma, mi;
+
+int main() {
+    freopen("10882.inp", "r", stdin);
+    freopen("10882.out", "w", stdout);
+
+    cin >> n;
+
+    for (int i = 0; i < n; i++) {
+        cin >> a >> c >> m;
+
+        mi = min(a, min(c, m));
+        ma = ((a + c + m) - 99) / 2;
+
+        ma < 0 ? ma = 0 : ma = ma;
+
+        if (ma > mi) cout << "Case #" << i + 1 << ": The records are faulty." << endl;
+        else cout << "Case #" << i + 1 << ": Between " << ma << " and " << mi << " times." << endl;
+    }
+
+    return 0;
+}

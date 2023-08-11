@@ -1,0 +1,6 @@
+# depslib dependency file v1.0
+1602933212 source:d:\hoc\truonglhp\vnoi bt\do thi\dijkstra\qbschool\qbschool.cpp
+	<stdio.h>
+	<vector>
+	<queue>
+
