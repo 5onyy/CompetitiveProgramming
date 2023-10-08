@@ -38,20 +38,25 @@ signed main()
     cin>>n;
     for (int i=1;i<=n;i++)
         cin>>p[i];
-    dp[1][1]=p[1];
-    dp[1][0]=p[1];
-    for (int i=2;i<=n;i++)
-    {
-        for (int j=1;j<=i;j++)
-        {
-            dp[i][j]=dp[i-1][j-1]*p[i]+dp[i-1][j]*(1-p[i]);
-        }
-    }
+    dp[0][0] = 1;
+    dp[1][0] = 1-p[1];
+    dp[0][1] = 0;
     for (int i=1;i<=n;i++)
     {
-        for (int j=1;j<=n;j++)
+        for (int j=0;j<=n;j++)
+        {
+            //dp[i][j] = dp[i-1][j];
+            if (j==0)   dp[i][j] = dp[i-1][j] * (1-p[i]);
+            if (j && i)  dp[i][j]=dp[i-1][j-1]*p[i]+dp[i-1][j]*(1-p[i]);
+        }
+    }
+/*     for (int i=1;i<=n;i++)
+    {
+        for (int j=0;j<=n;j++)
             cout<<dp[i][j]<<" ";
         cout<<endl;
-    }
-    cout<<setprecision(10)<<fixed<<dp[n][n];
+    }  */ 
+    double ans=0;
+    for (int i= n/2+1; i<=n; i++)   ans += dp[n][i];
+    cout<<setprecision(10)<<fixed<<ans;
 }
