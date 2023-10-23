@@ -1,8 +1,0 @@
-# depslib dependency file v1.0
-1691591868 source:d:\competitive programming\codeforces\86d\main.cpp
-	<iostream>
-	<vector>
-	<unordered_map>
-	<math.h>
-	<algorithm>
-
