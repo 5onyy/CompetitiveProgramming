@@ -33,18 +33,18 @@ template<class U, class V> std::ostream& operator << (std::ostream& out, const s
 template<class Con, class = decltype(begin(std::declval<Con>()))>
 typename std::enable_if < !std::is_same<Con, std::string>::value, std::ostream& >::type
 operator << (std::ostream& out, const Con& con) {
-    out << '{';
-    for (auto beg = con.begin(), it = beg; it != con.end(); it++) {
-        out << (it == beg ? "" : ", ") << *it;
-    }
-    return out << '}';
+	out << '{';
+	for (auto beg = con.begin(), it = beg; it != con.end(); it++) {
+		out << (it == beg ? "" : ", ") << *it;
+	}
+	return out << '}';
 }
 template<size_t i, class T> std::ostream& print_tuple_utils(std::ostream& out, const T& tup) {
-    if (i == std::tuple_size<T>::value) return out << ")";
-    else return print_tuple_utils < i + 1, T > (out << (i ? ", " : "(") << get<i>(tup), tup);
+	if (i == std::tuple_size<T>::value) return out << ")";
+	else return print_tuple_utils < i + 1, T > (out << (i ? ", " : "(") << get<i>(tup), tup);
 }
 template<class ...U> std::ostream& operator << (std::ostream& out, const std::tuple<U...>& t) {
-    return print_tuple_utils<0, std::tuple<U...>>(out, t);
+	return print_tuple_utils<0, std::tuple<U...>>(out, t);
 }
 /*-------------------------------------------------*/
 
@@ -55,16 +55,66 @@ int flog(int x) {return 31 - __builtin_clz(x);}
 int flog(ll x) {return 63 - __builtin_clzll(x);}
 
 void setIO(string name) {
-    cin.tie(0)->sync_with_stdio(0);
-    if (sz(name)) {
-        freopen((name + ".inp").c_str(), "r", stdin);
-        freopen((name + ".out").c_str(), "w", stdout);
-    }
+	cin.tie(0)->sync_with_stdio(0);
+	if (sz(name)) {
+		freopen((name + ".inp").c_str(), "r", stdin);
+		freopen((name + ".out").c_str(), "w", stdout);
+	}
 }
 
+int n, K, L, l, r;
+ll sum_front, sum_back;
+vi a, b;
+multiset<int> used, unused;
+
+void add(int i) {
+	sum_front += a[i];
+	if (used.size() < L) {
+		used.insert(b[i]);
+		sum_back += b[i];
+	}
+	else if (*used.begin() < b[i]) {
+		int change = *used.begin();
+		used.erase(used.begin());
+		sum_back -= change;
+		unused.insert(change);
+		used.insert(b[i]);
+		sum_back += b[i];
+	}
+	else unused.insert(b[i]);
+}
+
+void rem(int i) {
+	sum_front -= a[i];
+	if (used.find(b[i]) != used.end()) {
+		sum_back -= b[i];
+		used.erase(used.find(b[i]));
+		if (unused.size()) {
+			int change = *unused.rbegin();
+			sum_back += change;
+			unused.erase(unused.find(change));
+			used.insert(change);
+		}
+	}
+	else unused.erase(unused.find(b[i]));
+}
+
+ll calc()	{return sum_back + sum_front;}
 
 int main() {
-    setIO("");
-
+	setIO("");
+	cin >> n;	a.resize(n);	b.resize(n);
+	for (auto &x : a)	cin >> x;
+	for (auto &x : b)	cin >> x;
+	cin >> K >> L;
+	for (int i = 0; i < K; i++)	add(i);
+	l = K - 1,	r = n - 1;
+	ll ans = calc();
+	while (l >= 0) {
+		rem(l--);
+		add(r--);
+		ans = max (ans, calc());
+	}
+	cout << ans;
 }
 

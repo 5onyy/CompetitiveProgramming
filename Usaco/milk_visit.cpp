@@ -33,18 +33,18 @@ template<class U, class V> std::ostream& operator << (std::ostream& out, const s
 template<class Con, class = decltype(begin(std::declval<Con>()))>
 typename std::enable_if < !std::is_same<Con, std::string>::value, std::ostream& >::type
 operator << (std::ostream& out, const Con& con) {
-    out << '{';
-    for (auto beg = con.begin(), it = beg; it != con.end(); it++) {
-        out << (it == beg ? "" : ", ") << *it;
-    }
-    return out << '}';
+	out << '{';
+	for (auto beg = con.begin(), it = beg; it != con.end(); it++) {
+		out << (it == beg ? "" : ", ") << *it;
+	}
+	return out << '}';
 }
 template<size_t i, class T> std::ostream& print_tuple_utils(std::ostream& out, const T& tup) {
-    if (i == std::tuple_size<T>::value) return out << ")";
-    else return print_tuple_utils < i + 1, T > (out << (i ? ", " : "(") << get<i>(tup), tup);
+	if (i == std::tuple_size<T>::value) return out << ")";
+	else return print_tuple_utils < i + 1, T > (out << (i ? ", " : "(") << get<i>(tup), tup);
 }
 template<class ...U> std::ostream& operator << (std::ostream& out, const std::tuple<U...>& t) {
-    return print_tuple_utils<0, std::tuple<U...>>(out, t);
+	return print_tuple_utils<0, std::tuple<U...>>(out, t);
 }
 /*-------------------------------------------------*/
 
@@ -55,16 +55,19 @@ int flog(int x) {return 31 - __builtin_clz(x);}
 int flog(ll x) {return 63 - __builtin_clzll(x);}
 
 void setIO(string name) {
-    cin.tie(0)->sync_with_stdio(0);
-    if (sz(name)) {
-        freopen((name + ".inp").c_str(), "r", stdin);
-        freopen((name + ".out").c_str(), "w", stdout);
-    }
+	cin.tie(0)->sync_with_stdio(0);
+	if (sz(name)) {
+		freopen((name + ".inp").c_str(), "r", stdin);
+		freopen((name + ".out").c_str(), "w", stdout);
+	}
 }
 
 
 int main() {
-    setIO("");
-
+	setIO("");
+	map<int, int>	mymap;
+	mymap[5] = 6;
+	mymap[9] = 12;
+	for (const auto &[key, val] : mymap)	debug(key);
 }
 
