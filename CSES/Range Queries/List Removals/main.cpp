@@ -24,8 +24,8 @@ const int maxN=2*1e5+1;
 const int BASE=311;
 const int N=1e5+5;
 const int MOD=1000000003;
-const int d4i[4]={-1, 0, 1, 0}, d4j[4]={0, 1, 0, -1};
-const int d8i[8]={-1, -1, 0, 1, 1, 1, 0, -1}, d8j[8]={0, 1, 1, 1, 0, -1, -1, -1};
+const int d4i[4]= {-1, 0, 1, 0}, d4j[4]= {0, 1, 0, -1};
+const int d8i[8]= {-1, -1, 0, 1, 1, 1, 0, -1}, d8j[8]= {0, 1, 1, 1, 0, -1, -1, -1};
 
 int n;
 int a[maxN],present[maxN],st[4*maxN];
@@ -33,10 +33,10 @@ int a[maxN],present[maxN],st[4*maxN];
 void build (int l,int r,int id)
 {
     if (l==r)
-        {
-            st[id]=1;
-            return;
-        }
+    {
+        st[id]=1;
+        return;
+    }
     int mid=(l+r)>>1;
     build(l,mid,id*2);
     build(mid+1,r,id*2+1);
@@ -73,14 +73,14 @@ signed main()
     //hardio("t");
     fastIO;
     cin>>n;
-    for (int i=1;i<=n;i++)
+    for (int i=1; i<=n; i++)
     {
         cin>>a[i];
     }
     build(1,n,1);
     vi present(n+1,1);
 
-    for (int i=0;i<n;i++)
+    for (int i=0; i<n; i++)
     {
         int x;
         cin>>x;
