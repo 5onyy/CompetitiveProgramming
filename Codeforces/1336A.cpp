@@ -9,7 +9,7 @@ using namespace std;
 #define sz(x) (int)(x).size()
 #define sqr(x) ((x) * (x))
 #define all(x)         x.begin(),x.end()
-#define rr(x)          sort(all(x)),x.resize((unique(all(x))-x.begin()));
+#define rr(x)          sort(all(x)),x.resize((unique(all(x))-x.begin()))
 #define rep(i, a, b) for (int i = a; i < (b); ++i)
 #define emb emplace_back
 #define timer cerr << "Time elapsed: " << 1.0 * clock() / CLOCKS_PER_SEC << " s.\n"
