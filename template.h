@@ -37,7 +37,8 @@ template<class U, class V> std::ostream& operator << (std::ostream& out, const s
     return out << '(' << p.first << ", " << p.second << ')';
 }
 
-template<class Con, class = decltype(begin(std::declval<Con>()))>
+template<class Con, class = decltype(begin
+(std::declval<Con>()))>
 typename std::enable_if < !std::is_same<Con, std::string>::value, std::ostream& >::type
 operator << (std::ostream& out, const Con& con) {
     out << '{';
